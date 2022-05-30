@@ -1,0 +1,277 @@
+[
+    {
+        "id": "fb97a40154d87cc4",
+        "type": "tab",
+        "label": "PZ2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a2cc93212c9693e3",
+        "type": "mqtt in",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "topic": "NUFT TI4/Variant8/#",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "8ed27c1bc19a1358",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "7675b2577a228c16"
+            ]
+        ]
+    },
+    {
+        "id": "7675b2577a228c16",
+        "type": "debug",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a5ad36f0e4425824",
+        "type": "mqtt in",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "topic": "NUFT TI4/Variant8/TT101",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "8ed27c1bc19a1358",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "fc1eee3c84b7fc2f"
+            ]
+        ]
+    },
+    {
+        "id": "fc1eee3c84b7fc2f",
+        "type": "debug",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "37d6053a1112f2d4",
+        "type": "mqtt out",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "topic": "NUFT TI4/Variant8/TT101",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8ed27c1bc19a1358",
+        "x": 490,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1120d296cfa0175e",
+        "type": "mqtt in",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "topic": "NUFT TI4/Variant8/Klapan",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "8ed27c1bc19a1358",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "bf22a0e81b85e44f"
+            ]
+        ]
+    },
+    {
+        "id": "bf22a0e81b85e44f",
+        "type": "ui_gauge",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "group": "15723a8a4cfcd366",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "ТТ101",
+        "label": "℃",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "75",
+        "x": 450,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3d1305c2a1ad4eb8",
+        "type": "ui_slider",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "15723a8a4cfcd366",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "37d6053a1112f2d4"
+            ]
+        ]
+    },
+    {
+        "id": "b90a303474909d8d",
+        "type": "function",
+        "z": "fb97a40154d87cc4",
+        "name": "sin",
+        "func": "var a;\na = msg.payload/10000;\nmsg.payload = (Math.sin (a) + 1.0)*25.0 + 25.0; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "3d1305c2a1ad4eb8"
+            ]
+        ]
+    },
+    {
+        "id": "7cdc15c2f4fa5640",
+        "type": "inject",
+        "z": "fb97a40154d87cc4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 500,
+        "wires": [
+            [
+                "b90a303474909d8d"
+            ]
+        ]
+    },
+    {
+        "id": "46e974aabf73c524",
+        "type": "ui_spacer",
+        "z": "fb97a40154d87cc4",
+        "name": "spacer",
+        "group": "15723a8a4cfcd366",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8ed27c1bc19a1358",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "http://test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "15723a8a4cfcd366",
+        "type": "ui_group",
+        "name": "NUFT TI4/Variant8/Klapan",
+        "tab": "71b92c42b2326fac",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "71b92c42b2326fac",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
